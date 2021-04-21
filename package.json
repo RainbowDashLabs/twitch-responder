@@ -1,8 +1,8 @@
 {
-  "name": "untitled",
+  "name": "twitch-responder-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tmi.js": "^1.7.5"
+    "tmi.js": "^1.8.3"
   }
 }
