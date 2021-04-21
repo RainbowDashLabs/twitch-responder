@@ -1,0 +1,10 @@
+{
+  "bot_target": "botname",
+  "trigger_action": "Dew it",
+  "trigger_message": "Dew it",
+  "answer_message": "!cmd",
+  "answer_action": "!cmd",
+  "min_message_delay": 3000,
+  "message_delay": 15000,
+  "verbose_logging": false
+}
