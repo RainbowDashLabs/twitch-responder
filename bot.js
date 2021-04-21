@@ -1,8 +1,8 @@
 const tmi = require('tmi.js');
 const fs = require('fs');
 
-let rawdata = fs.readFileSync('config.json');
-const opts = JSON.parse(rawdata);
+let rawData = fs.readFileSync('config.json');
+const opts = JSON.parse(rawData);
 
 const cred = new Map();
 process.argv.forEach(a => {
@@ -49,19 +49,19 @@ function onConnectedHandler(addr, port) {
 function onMessageHandler(channel, userstate, msg, self) {
     if (self) return;
 
-    if (opts.trigger_message.length == 0) return;
+    if (opts.trigger_message.length === 0) return;
 
     if (equalIgnoreCase(userstate.username, opts.bot_target)) {
         if (includesIgnoreCase(msg, opts.trigger_message)) {
-            print("Noticed trigger message.");
+            log("Noticed trigger message.");
             let delay = getDelay();
-            print("Waiting " + (delay / 1000) + " seconds.");
+            verboseLog("Waiting " + (delay / 1000) + " seconds.");
             setTimeout(() => client.say(channel, opts.answer_message), delay);
         } else {
-            print("Not a trigger message.");
+            verboseLog("Not a trigger message.");
         }
     } else {
-        print("Wrong user.");
+        verboseLog("Wrong user.");
     }
 }
 
@@ -69,19 +69,19 @@ function onMessageHandler(channel, userstate, msg, self) {
 function onActionHandler(channel, userstate, msg, self) {
     if (self) return;
 
-    if (opts.trigger_action.length == 0) return;
+    if (opts.trigger_action.length === 0) return;
 
     if (equalIgnoreCase(userstate.username, opts.bot_target)) {
         if (includesIgnoreCase(msg, opts.trigger_action)) {
-            print("Noticed trigger action.");
+            log("Noticed trigger action.");
             let delay = getDelay();
-            print("Waiting " + (delay / 1000) + " seconds.");
+            verboseLog("Waiting " + (delay / 1000) + " seconds.");
             setTimeout(() => client.say(channel, opts.answer_action), delay);
         } else {
-            print("Not a trigger action.");
+            verboseLog("Not a trigger action.");
         }
     } else {
-        print("Wrong user.");
+        verboseLog("Wrong user.");
     }
 }
 
@@ -112,6 +112,12 @@ function l(event) {
     }
 }
 
-function print(log) {
+function log(log) {
     console.log(log)
+}
+
+function verboseLog(log) {
+    if (opts.verbose_logging) {
+        console.log(log);
+    }
 }
